@@ -1,5 +1,3 @@
-# PostgreSQL → Dataverse Field Migrator
-
 Aplicação console .NET que lê o schema de uma tabela PostgreSQL, cria os campos correspondentes em uma entidade do Dataverse e insere os dados.
 
 ---
@@ -15,20 +13,21 @@ Aplicação console .NET que lê o schema de uma tabela PostgreSQL, cria os camp
 
 ### Mapeamento de tipos
 
-| PostgreSQL                     | Dataverse         |
-|-------------------------------|-------------------|
-| integer                       | Integer           |
-| character varying / character | Text (String)     |
-| text                          | Memo              |
-| numeric / decimal             | Decimal           |
+| PostgreSQL                     | Dataverse            |
+|-------------------------------|----------------------|
+| integer                       | Integer              |
+| character varying / character | Text (String)        |
+| text                          | Memo                 |
+| numeric / decimal             | Decimal              |
 | boolean                       | Boolean (Two Option) |
-| timestamp without time zone   | DateTime          |
+| timestamp without time zone   | DateTime             |
 
 ---
 
 ## Pré-requisitos
 
 - .NET Framework 4.6.2
+- Visual Studio 2019 ou superior
 - Acesso ao banco PostgreSQL com permissão de leitura na tabela
 - Usuário com permissão de customização no ambiente Dataverse
 - A entidade de destino já deve existir no Dataverse antes de executar
@@ -55,19 +54,27 @@ Aplicação console .NET que lê o schema de uma tabela PostgreSQL, cria os camp
 
 ---
 
-## Como usar
+## Como compilar e executar
 
-Execute diretamente pelo Visual Studio ou via terminal:
+O repositório não inclui os binários compilados. É necessário compilar antes de executar.
 
-```bash
-dotnet run
-```
+**Via Visual Studio:**
+1. Abra o arquivo `CopiarCamposDeTabelaDePostgresParaDataverse.sln`
+2. Clique com botão direito na solução → **Restore NuGet Packages**
+3. Menu **Build → Build Solution** (ou `Ctrl+Shift+B`)
+4. Execute com `F5` ou `Ctrl+F5`
 
-ou pelo executável gerado:
+**Via linha de comando:**
 
-```bash
-CopiarCamposDeTabelaDePostgresParaDataverse.exe
-```
+(bash)
+nuget restore
+msbuild CopiarCamposDeTabelaDePostgresParaDataverse.sln /p:Configuration=Release
+bin\Release\CopiarCamposDeTabelaDePostgresParaDataverse.exe
+
+
+
+
+> O `nuget restore` via terminal exige que o [NuGet CLI](https://www.nuget.org/downloads) esteja instalado e no PATH.
 
 O progresso é exibido no console campo a campo e registro a registro. Em caso de erro em um campo específico, o processo continua para os demais.
 
@@ -83,3 +90,19 @@ O progresso é exibido no console campo a campo e registro a registro. Em caso d
 ---
 
 ## Estrutura do projeto
+
+```
+CopiarCamposDeTabelaDePostgresParaDataverse/
+├── AppSettings.cs
+├── DataverseService.cs
+├── PostgresService.cs
+├── Program.cs
+├── App.config
+├── appsettings.example.json
+├── appsettings.json              # não versionado (.gitignore)
+├── packages.config
+├── CopiarCamposDeTabelaDePostgresParaDataverse.csproj
+├── CopiarCamposDeTabelaDePostgresParaDataverse.sln
+├── Properties/
+│   └── AssemblyInfo.cs
+└── packages/                     # não versionado (.gitignore)
