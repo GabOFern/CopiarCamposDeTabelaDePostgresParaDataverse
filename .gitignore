@@ -1,0 +1,19 @@
+# Saída de compilação
+bin/
+obj/
+
+# Pacotes NuGet (restaurados automaticamente via packages.config)
+packages/
+
+# Configurações com credenciais
+appsettings.json
+
+# Arquivos gerados pelo Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Arquivos de log
+*.log
